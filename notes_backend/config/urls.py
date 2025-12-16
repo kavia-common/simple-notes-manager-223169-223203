@@ -20,9 +20,12 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from django.views.decorators.csrf import csrf_exempt
+from api.views import health  # import health for root mapping
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('health', health, name='root-health'),  # root-level health without trailing slash
+    path('health/', health, name='root-health-slash'),  # support with slash
     path('api/', include('api.urls')),
 ]
 
